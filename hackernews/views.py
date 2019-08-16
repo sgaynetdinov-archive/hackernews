@@ -3,6 +3,7 @@ from rest_framework.generics import ListAPIView
 
 from .models import Item
 from .serializers import ItemSerializer
+from .pagination import HackerNewsPagination
 
 
 class ListsPost(ListAPIView):
@@ -11,3 +12,4 @@ class ListsPost(ListAPIView):
     filter_backends = [OrderingFilter]
     ordering_fields = '__all__'
     ordering = ['id']
+    pagination_class = HackerNewsPagination

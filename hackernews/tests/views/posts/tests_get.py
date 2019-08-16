@@ -59,16 +59,68 @@ class PostsTest(TestCase):
         )
 
     def test_default_limit(self):
-        pass
+        ItemFactory.create_batch(6)
+
+        got = self.client.get('/posts')
+
+        self.assertEqual(Item.objects.count(), 6)
+        self.assertEqual(len(got.data), 5)
 
     def test_limit(self):
-        pass
+        ItemFactory.create_batch(6)
 
-    def test_offset(self):
-        pass
+        got = self.client.get('/posts', {'limit': 3})
+
+        self.assertEqual(len(got.data), 3)
+        self.assertEqual(
+            [item['id'] for item in got.data],
+            [item.id for item in Item.objects.order_by('id')[:3]]
+        )
 
     def test_offset_and_limit(self):
-        pass
+        ItemFactory.create_batch(6)
+
+        got = self.client.get('/posts', {'limit': 3, 'offset': 3})
+
+        self.assertEqual(len(got.data), 3)
+        self.assertEqual(
+            [item['id'] for item in got.data],
+            [item.id for item in Item.objects.order_by('id')[3:6]]
+        )
 
     def test_offset_and_limit_and_order(self):
-        pass
+        ItemFactory.create_batch(6)
+
+        got = self.client.get('/posts', {'limit': 3, 'offset': 3, 'order': '-url'})
+
+        self.assertEqual(len(got.data), 3)
+        self.assertEqual(
+            [item['url'] for item in got.data],
+            [item.url for item in Item.objects.order_by('-url')[3:6]]
+        )
+
+    def test_big_number_limit(self):
+        ItemFactory.create_batch(110)
+
+        got = self.client.get('/posts', {'limit': 100500})
+
+        self.assertEqual(Item.objects.count(), 110)
+        self.assertEqual(len(got.data), 100)
+
+    def test_not_positive_number_limit(self):
+        ItemFactory.create_batch(6)
+
+        got = self.client.get('/posts', {'limit': -3})
+
+        self.assertEqual(len(got.data), 5)
+
+    def test_not_positive_number_offser(self):
+        ItemFactory.create_batch(6)
+
+        got = self.client.get('/posts', {'limit': 3, 'offset': -3})
+
+        self.assertEqual(len(got.data), 3)
+        self.assertEqual(
+            [item['id'] for item in got.data],
+            [item.id for item in Item.objects.order_by('id')[:3]]
+        )
