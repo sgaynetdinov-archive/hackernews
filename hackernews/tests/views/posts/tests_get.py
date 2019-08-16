@@ -1,4 +1,4 @@
-from django.test import TestCase, Client
+from django.test import Client, TestCase
 
 from hackernews.models import Item
 from hackernews.tests.factory import ItemFactory

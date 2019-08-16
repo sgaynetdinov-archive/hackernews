@@ -2,8 +2,8 @@ from rest_framework.filters import OrderingFilter
 from rest_framework.generics import ListAPIView
 
 from .models import Item
-from .serializers import ItemSerializer
 from .pagination import HackerNewsPagination
+from .serializers import ItemSerializer
 
 
 class ListsPost(ListAPIView):

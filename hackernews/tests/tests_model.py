@@ -1,7 +1,6 @@
 from django.db.utils import IntegrityError
 from django.test import TestCase
 from django.utils import timezone
-
 from freezegun import freeze_time
 
 from hackernews.models import Item
