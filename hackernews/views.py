@@ -1,13 +1,13 @@
-from rest_framework.response import Response
-from rest_framework.viewsets import GenericViewSet
+from rest_framework.filters import OrderingFilter
+from rest_framework.generics import ListAPIView
 
 from .models import Item
 from .serializers import ItemSerializer
 
 
-class ListsPost(GenericViewSet):
+class ListsPost(ListAPIView):
     queryset = Item.objects.all()
-
-    def list(self, request, *args, **kwargs):
-        serializer = ItemSerializer(self.get_queryset(), many=True)
-        return Response(serializer.data)
+    serializer_class = ItemSerializer
+    filter_backends = [OrderingFilter]
+    ordering_fields = '__all__'
+    ordering = ['id']

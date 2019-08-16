@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ] + [
     'rest_framework',
+    'django_filters',
 ] + [
     'hackernews',
 ]
@@ -135,4 +136,5 @@ STATIC_URL = '/static/'
 
 REST_FRAMEWORK = {
     'DATETIME_FORMAT': "%Y-%m-%dT%H:%M:%S.%f",
+    'ORDERING_PARAM': 'order'
 }
