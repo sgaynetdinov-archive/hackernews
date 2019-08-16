@@ -8,6 +8,7 @@ verify_ssl = true
 [packages]
 django = "==2.2.4"
 django-environ = "==0.4.5"
+freezegun = "==0.3.12"
 
 [requires]
 python_version = "3.6"
