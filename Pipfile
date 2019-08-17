@@ -13,6 +13,7 @@ django = "==2.2.4"
 django-environ = "==0.4.5"
 djangorestframework = "==3.10.2"
 django-filter = "==2.2.0"
+parsel = "==1.5.2"
 
 [requires]
 python_version = "3.6"
