@@ -10,7 +10,7 @@ class HackerNewsParser:
 
     def download(self):
         response = urlopen(URL)
-        self._html = response.read()
+        self._html = response.read().decode()
 
     def as_json(self):
         sel = Selector(text=self._html)

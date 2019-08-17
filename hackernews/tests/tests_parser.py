@@ -68,7 +68,7 @@ class HackerNewsParserTest(TestCase):
 
     @patch('hackernews.parser.urlopen')
     def test_success_download(self, mock):
-        self.magic.read.return_value = raw_text
+        self.magic.read.return_value = raw_text.encode()
         mock.return_value = self.magic
 
         self.parser.download()
@@ -87,7 +87,7 @@ class HackerNewsParserTest(TestCase):
 
     @patch('hackernews.parser.urlopen')
     def test_convert_to_json(self, mock):
-        self.magic.read.return_value = raw_text
+        self.magic.read.return_value = raw_text.encode()
         mock.return_value = self.magic
 
         self.parser.download()
