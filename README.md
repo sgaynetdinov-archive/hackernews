@@ -20,3 +20,24 @@ pipenv run python manage.py test
 
 pipenv run python manage.py runserver
 ``` 
+
+
+#### Production mode
+```
+# Create file .env
+
+DJANGO_SECRET_KEY=
+DJANGO_ALLOWED_HOSTS=
+DJANGO_DB=
+DJANGO_DEBUG=False
+```
+
+```
+docker-compose build
+
+docker-compose run web python manage.py migrate
+```
+
+```
+docker-compose up -d
+```
