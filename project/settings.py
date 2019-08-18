@@ -131,5 +131,8 @@ STATIC_URL = '/static/'
 
 REST_FRAMEWORK = {
     'DATETIME_FORMAT': "%Y-%m-%dT%H:%M:%S.%f",
-    'ORDERING_PARAM': 'order'
+    'ORDERING_PARAM': 'order',
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    )
 }
